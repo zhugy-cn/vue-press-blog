@@ -19,6 +19,8 @@ module.exports = {
           title: 'Vue',
           children: [
             '/basic/vue/',
+            '/basic/vue/vue-2',
+            '/basic/vue/vue-1',
           ]
         },
         {
@@ -35,6 +37,13 @@ module.exports = {
             '/basic/css/',
             '/basic/css/css1',
             '/basic/css/css2',
+          ]
+        },
+        {
+          title: 'DCloud',
+          children: [
+            '/basic/DCloud/DCloud1',
+            '/basic/DCloud/mui1',
           ]
         },
         {
