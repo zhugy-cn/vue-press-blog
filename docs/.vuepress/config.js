@@ -5,6 +5,7 @@ module.exports = {
     ['link', { rel: 'icon', href: '/favicon.png' }]
   ],
   themeConfig: {
+    sidebarDepth: 2,
     // 导航栏
     nav: [
       { text: '基础知识', link: '/basic/' },
@@ -45,8 +46,6 @@ module.exports = {
           title: 'JavaScript',
           children: [
             '/basic/javascript/',
-            '/basic/javascript/javascript1',
-            '/basic/javascript/javascript2',
             '/basic/javascript/array',
           ]
         },
