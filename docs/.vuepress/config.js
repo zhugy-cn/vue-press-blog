@@ -9,7 +9,25 @@ module.exports = {
     nav: [
       { text: '基础知识', link: '/basic/' },
       { text: '代码片段', link: '/snippet/' },
-      { text: 'github', link: 'https://github.com/zhugy-cn' },
+      {
+        text: '在线文档',
+        items: [
+          { text: 'Vue', link: 'https://cn.vuejs.org/' },
+          { text: 'Vue Router', link: 'https://router.vuejs.org/zh/' },
+          { text: 'Animate.css', link: 'https://daneden.github.io/animate.css/' },
+          { text: 'XorPay', link: 'https://xorpay.com/' }
+        ]
+      },
+      {
+        text: '在线工具',
+        items: [
+          { text: 'Can I Use', link: 'https://www.caniuse.com/#search=promise' },
+          { text: '经纬度查询', link: 'http://www.gpsspg.com/maps.htm' },
+          { text: '在线工具', link: 'https://tool.lu/' },
+          { text: '谷歌访问助手', link: 'http://www.ggfwzs.com/' }
+        ]
+      },
+      { text: 'github', link: 'https://github.com/zhugy-cn' }
     ],
     // 侧边栏
     sidebar: {
@@ -29,6 +47,7 @@ module.exports = {
             '/basic/javascript/',
             '/basic/javascript/javascript1',
             '/basic/javascript/javascript2',
+            '/basic/javascript/array',
           ]
         },
         {
