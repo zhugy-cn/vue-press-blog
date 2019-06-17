@@ -154,24 +154,116 @@
   ### [**copyWithin(ES6)**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin)
   > 浅复制数组的一部分到同一数组中的另一个位置
   ``` js
-                 //  'c', 'd',
-    var arr1 = ['a', 'b', 'c', 'd', 'e']
-    var arr2 = arr1.copyWithin(1, 2, 4)   // 索引 2 到 4 之前的值
-    console.log(arr1 === arr2);   // true
-    console.log(arr1);  // ["a", "c", "d", "d", "e"]
-    console.log(arr2);  // ["a", "c", "d", "d", "e"]
+               //  'c', 'd',
+  let arr1 = ['a', 'b', 'c', 'd', 'e']
+  let arr2 = arr1.copyWithin(1, 2, 4)   // 索引 2 到 4 之前的值
+  console.log(arr1 === arr2);   // true
+  console.log(arr1);  // ["a", "c", "d", "d", "e"]
+  console.log(arr2);  // ["a", "c", "d", "d", "e"]
 
-             // 'c', 'd', 'e'
-    var arr3 = ['a', 'b', 'c', 'd', 'e']
-    var arr4 = arr3.copyWithin(0, 2)      // 索引 2 到末尾的值
-    console.log(arr3);  // ["c", "d", "e", "d", "e"]
-    console.log(arr4);  // ["c", "d", "e", "d", "e"]
+           // 'c', 'd', 'e'
+  let arr3 = ['a', 'b', 'c', 'd', 'e']
+  let arr4 = arr3.copyWithin(0, 2)      // 索引 2 到末尾的值
+  console.log(arr3);  // ["c", "d", "e", "d", "e"]
+  console.log(arr4);  // ["c", "d", "e", "d", "e"]
   ```
   
 <br />
 
 ## 访问方法
+  ### [**concat**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
+  > 返回一个由当前数组和其它若干个数组或者若干个非数组值组合而成的新数组。
+  ``` js
+  let array1 = ['a', 'b', 'c'];
+  let array2 = ['d', 'e', 'f'];
+  let array3 = array1.concat(array2)
+  console.log(array3);  // ["a", "b", "c", "d", "e", "f"]
+  ```
 
+  ### [**join**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
+  > 将数组中的所有元素连接成一个字符串。
+  ``` js
+  let array = ['We', 'are', 'Chinese'];
+  console.log(array.join(''));  // "WeareChinese"
+  console.log(array.join());    // "We,are,Chinese"
+  console.log(array.join('+')); // "We+are+Chinese"
+  ```
+
+  ### [**slice**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+  > 将数组中一部分元素浅复制存入新的数组对象，并且返回这个数组对象。不包含`end`
+  ``` js
+  let array = [1, 2, 3, 4, 5, 6];
+  let array1 = array.slice(1, 2)
+  let array2 = array.slice(2, 5)
+  let array3 = array.slice()
+  console.log(array1);  // [2]
+  console.log(array2);  // [3, 4, 5]
+  console.log(array3);  // [1, 2, 3, 4, 5, 6]
+  ```
+
+  ### [**toString**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/toString)
+  > 返回一个字符串，表示指定的数组及其元素。当数组直接和字符串作连接操作时，将会自动调用其`toString()`方法。
+  ``` js
+  let colors1 = ['red', 'yellow', 'blue']
+  let colors2 = colors1.toString()
+  let colors3 = colors1 + 'black'
+  console.log(colors2);   // red,yellow,blue
+  console.log(colors3);   // red,yellow,blueblack
+  ```
+
+  ### [**toLocaleString**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString)
+  > 返回一个字符串表示数组中的元素,
+  ``` js
+  var array = [{ name: 'zz' }, 123, "abc", new Date()];
+  var str = array.toLocaleString();
+  console.log(str);   // [object Object],123,abc,2019/6/17 下午9:58:53
+  ```
+  ::: tip 数组中的元素将使用各自的 toLocaleString 方法转成字符串
+  - **Object**：`Object.prototype.toLocaleString()`
+  - **Number**：`Number.prototype.toLocaleString()`
+  - **Date**：`Date.prototype.toLocaleString()`
+  :::
+  
+  
+
+  ### [**indexOf**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
+  > 返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+  ``` js
+  let colors = ['red', 'yellow', 'blue', 'black', 'white', '123']
+  let num1 = colors.indexOf('black')
+  let num2 = colors.indexOf('yellow')
+  let num3 = colors.indexOf('green')
+  let num4 = colors.indexOf(123)
+  console.log(num1);  // 3
+  console.log(num2);  // 1
+  console.log(num3);  // -1
+  console.log(num4);  // -1 使用的是严格相等
+  ```
+  
+  ### [**lastIndexOf**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf)
+  > 查找元素在数组中最后一次出现时的索引，如果没有，则返回-1。从数组的后面向前查找
+  ``` js
+  let colors = [1, 2, 1, 1, 3, 2, 4]
+  let num1 = colors.lastIndexOf(1)
+  let num2 = colors.lastIndexOf(2)
+  let num3 = colors.lastIndexOf(5)
+  console.log(num1);  // 3
+  console.log(num2);  // 5
+  console.log(num3);  // -1
+  ```
+
+  ### [**includes(ES7)**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
+  > 判断一个数组是否包含一个指定的值，如果包含则返回 true，否则返回false。
+  ``` js
+  let colors = ['red', 'yellow', 'blue', '1']
+  let bool1 = colors.includes('blue')
+  let bool2 = colors.includes(1)
+  console.log(bool1)  // true
+  console.log(bool2)  // false
+  ```
+
+  ### [**toSource**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/toSource)
+  > **非标准**，不建议使用
 
 <br />
 
