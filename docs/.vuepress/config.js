@@ -47,6 +47,7 @@ module.exports = {
           children: [
             '/basic/javascript/',
             '/basic/javascript/array',
+            '/basic/javascript/string',
           ]
         },
         {
