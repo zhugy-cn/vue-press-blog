@@ -2,6 +2,7 @@ module.exports = {
   // title: "学习前端",
   description: "Welcome to my blog",
   head: [["link", { rel: "icon", href: "/favicon.png" }]],
+  pageClass: 'zhuguagyong',
   themeConfig: {
     sidebarDepth: 2,
     // 导航栏
@@ -19,8 +20,8 @@ module.exports = {
             link: "https://daneden.github.io/animate.css/"
           },
           { text: "XorPay", link: "https://xorpay.com/" },
-          
-          { text: "EasyWeChat", link: "https://www.easywechat.com/" }
+          { text: "EasyWeChat", link: "https://www.easywechat.com/" },
+          { text: "VuePress", link: "https://blog.csdn.net/weixin_34345560/article/details/91457750" }
         ]
       },
       {

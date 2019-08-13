@@ -259,12 +259,220 @@
 ## 约束
 
 ### 1. 非空约束
+- `not null`：值不能为`Null`
+1. 创建表时添加
+  ``` sql
+  CREATE TABLE test (
+    id INT,
+    name VARCHAR(20) NOT NULL
+  )
+  ```
+2. 创建完表后添加
+  ``` sql
+  alter table test modify age varchar(20) not null 
+  ```
+3. 删除非空约束
+  ``` sql
+  alter table test modify age varchar(20)
+  ```
 
 ### 2. 唯一约束
+- `unique`：值不能重复，但是`Null`不包含在内
+1. 创建表时添加
+  ``` sql
+  CREATE TABLE test (
+    id INT,
+    name VARCHAR(20) unique
+  )
+  ```
+2. 创建完表后添加
+  ``` sql
+  alter table test modify age varchar(20) unique
+  ```
+3. 删除唯一约束
+  ``` sql
+  alter table test drop index age
+  ```
 
 ### 3. 主键约束
+- `primary  key`
+  1. 非空且唯一
+  2. 一张表只能有一个主键
+  3. 主键就是表中记录的唯一标识
+
+1. 创建表时添加
+  ``` sql
+  CREATE TABLE test (
+    id INT PRIMARY KEY,
+    name VARCHAR(20)
+  )
+  ```
+2. 创建完表后添加
+  ``` sql
+  alter table test modify age varchar(20) unique
+  ```
+3. 删除唯一约束
+  ``` sql
+  alter table test drop index age
+  ```
 
 ### 4. 外键约束
+- `foreign key`
 
 
-## 
+
+
+## 多表查询
+- 笛卡儿积
+  1. 有两个集合A、B，取这两个集合的所有组成情况
+  2. 要完成多表查询，需要用`where`消除无用的数据
+- 数据表对应关系
+  - `emp` 表的 `dept_id` 外键 `dept` 表的 `id`
+  ![inheritAttrs: true](./images/mysql-01.png)
+  
+  
+### 1. 内链接
+- 内连接指的是把表与表之间匹配的数据行查询出来。就是两张表之间数据行匹配时，要同时满足`ON`语句后面的条件才行。
+
+- **1.1  隐式内链接**
+::: warning 语法
+``` sql
+select 
+  字段1, 字段2, ... 
+from 
+  表名1, 表名2, ... 
+where 
+  条件
+```
+:::
+
+::: tip 示例
+``` sql
+SELECT
+  t1.*,               -- 字段名
+  t2.`name` t2_name   -- 字段名
+FROM
+  emp t1,   -- 表名
+  dept t2   -- 表名
+WHERE
+  t1.dept_id = t2.id    -- 条件
+```
+:::
+
+
+- **1.2 显式内链接**
+::: warning 语法
+``` sql
+select 
+  字段1, 字段2, ...
+from 
+  表名1
+inner join
+  表名2
+on
+  条件
+```
+:::
+
+::: tip 示例
+``` sql
+SELECT
+  t1.*,               -- 字段名
+  t2.`name` t2_name   -- 字段名
+FROM
+  emp t1    -- 表名
+INNER JOIN  -- inner 可以省略
+  dept t2   -- 表名
+ON 
+  t1.dept_id = t2.id  -- 条件
+```
+:::
+
+- **1.3 内链接要点**
+  1. 从哪些表中查询数据
+  2. 条件是什么
+  3. 查询哪些字段
+  4. **如果某一条的外键为`Null`的话就会忽略这一条，这时候就需要使用外链接来查询**
+
+
+### 2. 外链接
+- `JOIN`前面的表叫`左表`，后面的表叫`右表`
+
+- **1.1  左外链接**
+- 无论是否符合`ON`语句后面的条件都会把**左表的记录全部查询出来**，右边的那张表只匹配符合条件的数据。当左表有数据而右表不满足条件时右表则填充 `Null`
+
+::: warning 语法
+``` sql
+select 
+  字段1, 字段2, ... 
+from 
+  表名1
+left outer join   -- outer可以省略
+  表名2
+on
+  条件
+```
+:::
+
+::: tip 查询的是左表所有数据以及其右表交集部分。
+``` sql
+SELECT
+  t1.*,               -- 字段名
+  t2.`name` t2_name   -- 字段名
+FROM
+  emp t1   -- 表名
+LEFT JOIN
+  dept t2   -- 表名
+ON
+  t1.dept_id = t2.id    -- 条件
+```
+:::
+
+
+- **1.2 右外链接**
+
+- 跟左外链接恰好相反，右边的表不管有没有满足`ON`后面的条件都会查询出来
+::: warning 语法
+``` sql
+select 
+  字段1, 字段2, ...
+from 
+  表名1
+right outer join  -- outer可以省略
+  表名2
+on
+  条件
+```
+:::
+
+::: tip 查询的是右表所有数据以及其左表交集部分。
+``` sql
+SELECT
+  t1.*,               -- 字段名
+  t2.`name` t2_name   -- 字段名
+FROM
+  emp t1    -- 表名
+RIGHT JOIN
+  dept t2   -- 表名
+ON
+  t1.dept_id = t2.id    -- 条件
+```
+:::
+
+
+### 4. 当查询相同的表时内链接、左外链接和右外链接的一些区别
+- 当查询字段为`Null`时
+
+  ![inheritAttrs: true](./images/mysql-05.png)
+- 内链接（inner join）
+
+  ![inheritAttrs: true](./images/mysql-04.png)
+- 左外链接（left join）
+
+  ![inheritAttrs: true](./images/mysql-02.png)
+- 右外链接（right join）
+
+  ![inheritAttrs: true](./images/mysql-03.png)
+
+
+### 3. 子查询
