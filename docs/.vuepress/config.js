@@ -13,12 +13,13 @@ module.exports = {
         text: "在线文档",
         items: [
           { text: "Vue", link: "https://cn.vuejs.org/" },
-          { text: "Vue Router", link: "https://router.vuejs.org/zh/" },
+          { text: "VueRouter", link: "https://router.vuejs.org/zh/" },
           {
             text: "Animate.css",
             link: "https://daneden.github.io/animate.css/"
           },
-          { text: "XorPay", link: "https://xorpay.com/" }
+          { text: "XorPay", link: "https://xorpay.com/" },
+          { text: "EasyWeChat", link: "https://www.easywechat.com/" }
         ]
       },
       {
@@ -48,7 +49,8 @@ module.exports = {
           children: [
             "/basic/javascript/",
             "/basic/javascript/array",
-            "/basic/javascript/string"
+            "/basic/javascript/string",
+            "/basic/javascript/mysql"
           ]
         },
         {
