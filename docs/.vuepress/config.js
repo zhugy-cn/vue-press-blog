@@ -1,5 +1,5 @@
 module.exports = {
-  title: "学习前端",
+  // title: "学习前端",
   description: "Welcome to my blog",
   head: [["link", { rel: "icon", href: "/favicon.png" }]],
   themeConfig: {
@@ -50,8 +50,7 @@ module.exports = {
           children: [
             "/basic/javascript/",
             "/basic/javascript/array",
-            "/basic/javascript/string",
-            "/basic/javascript/mysql"
+            "/basic/javascript/string"
           ]
         },
         {
