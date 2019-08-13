@@ -19,6 +19,7 @@ module.exports = {
             link: "https://daneden.github.io/animate.css/"
           },
           { text: "XorPay", link: "https://xorpay.com/" },
+          
           { text: "EasyWeChat", link: "https://www.easywechat.com/" }
         ]
       },
