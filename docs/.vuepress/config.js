@@ -7,9 +7,10 @@ module.exports = {
     sidebarDepth: 2,
     // 导航栏
     nav: [
-      { text: "基础知识", link: "/basic/" },
-      { text: "代码片段", link: "/snippet/" },
+      { text: "前端", link: "/basic/" },
+      { text: "后端", link: "/java/" },
       { text: "数据库", link: "/database/" },
+      { text: "代码片段", link: "/snippet/" },
       {
         text: "在线文档",
         items: [
@@ -40,7 +41,7 @@ module.exports = {
     ],
     // 侧边栏
     sidebar: {
-      // 基础知识
+      // 前端
       "/basic/": [
         {
           title: "Vue",
@@ -65,6 +66,13 @@ module.exports = {
         {
           title: "浏览器",
           children: ["/basic/browser/"]
+        }
+      ],
+      // 后端
+      "/java/": [
+        {
+          title: "JDBC",
+          children: ["/java/jdbc"]
         }
       ],
       // 代码片段
