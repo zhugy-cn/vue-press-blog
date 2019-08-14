@@ -460,7 +460,7 @@ ON
 :::
 
 
-### 4. 当查询相同的表时内链接、左外链接和右外链接的一些区别
+- **1.3 当查询相同的表时内链接、左外链接和右外链接的一些区别**
 - 当查询字段为`Null`时
 
   ![inheritAttrs: true](./images/mysql-05.png)
@@ -476,3 +476,40 @@ ON
 
 
 ### 3. 子查询
+- 概念：查询中嵌套查询，称嵌套查询为子查询。根据子查询返回的结果可分为3钟情况
+  1. 子查询的结果是**单行单列**
+  2. 子查询的结果是**多行单列**
+  3. 子查询的结果是**多行多列**，又叫虚拟表
+
+::: tip 1. 单行单列：查询员工工资小于平均工资的记录
+``` sql
+-- 1. 查询出来平均数，将这条语句作为子查询
+SELECT AVG(salary) FROM emp
+
+-- 使用子查询
+SELECT * FROM emp WHERE salary < (SELECT AVG(salary) FROM emp)
+```
+- 子查询的结果是单行单列的
+![inheritAttrs: true](./images/mysql-06.png)
+:::
+
+
+::: tip 2. 多行单列：查询'财务部'和'市场部'所有的员工信息
+``` sql
+-- 1. 查询 开发部 和 市场部 的 id
+SELECT id FROM dept WHERE `name` = '开发部' OR `name` = '市场部'  -- 1 ，2
+-- 2. 将查询出来的 id 作为条件查询员工
+SELECT * FROM emp WHERE dept_id = 1 OR dept_id = 2
+
+-- 使用子查询
+SELECT 
+  * 
+FROM 
+  emp 
+WHERE 
+  dept_id 
+IN (SELECT id FROM dept WHERE `name` IN('开发部', '市场部'))
+```
+- 子查询的结果是多行单列的
+![inheritAttrs: true](./images/mysql-07.png)
+:::
