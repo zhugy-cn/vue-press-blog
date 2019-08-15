@@ -2,13 +2,14 @@ module.exports = {
   // title: "学习前端",
   description: "Welcome to my blog",
   head: [["link", { rel: "icon", href: "/favicon.png" }]],
-  pageClass: 'zhuguagyong',
+  pageClass: "zhuguagyong",
   themeConfig: {
     sidebarDepth: 2,
     // 导航栏
     nav: [
       { text: "前端", link: "/basic/" },
-      { text: "后端", link: "/java/" },
+      { text: "后端", link: "/server/" },
+      { text: "java", link: "/java/" },
       { text: "数据库", link: "/database/" },
       { text: "代码片段", link: "/snippet/" },
       {
@@ -22,7 +23,11 @@ module.exports = {
           },
           { text: "XorPay", link: "https://xorpay.com/" },
           { text: "EasyWeChat", link: "https://www.easywechat.com/" },
-          { text: "VuePress", link: "https://blog.csdn.net/weixin_34345560/article/details/91457750" }
+          {
+            text: "VuePress",
+            link:
+              "https://blog.csdn.net/weixin_34345560/article/details/91457750"
+          }
         ]
       },
       {
@@ -66,6 +71,19 @@ module.exports = {
         {
           title: "浏览器",
           children: ["/basic/browser/"]
+        }
+      ],
+      // 后端
+      "/server/": [
+        {
+          title: "Mysql",
+          children: [
+            "/server/mysql/01-DML",
+            "/server/mysql/02-DQL",
+            "/server/mysql/03-constraint",
+            "/server/mysql/04-multi-table",
+            "/server/mysql/05-transaction"
+          ]
         }
       ],
       // 后端

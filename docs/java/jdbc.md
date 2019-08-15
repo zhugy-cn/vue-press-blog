@@ -1,15 +1,16 @@
 # JDBC
 
 ## 基本概念
-  - 概念：Java DataBase Connectivity。Java 数据库连接。Java语言操作数据库
-  - 本质：由官方定义的一套操作所有关系型数据库的规则（接口），各个数据库厂商去实现这套接口，提供数据库
-  驱动`jar`包。开发人员使用这套接口（JDBC）编程，真正执行的代码是驱动`jar`包中的实现类。
 
+- 概念：Java DataBase Connectivity。Java 数据库连接。Java 语言操作数据库
+- 本质：由官方定义的一套操作所有关系型数据库的规则（接口），各个数据库厂商去实现这套接口，提供数据库
+  驱动`jar`包。开发人员使用这套接口（JDBC）编程，真正执行的代码是驱动`jar`包中的实现类。
+- 使用时需要引入``mysql-connector-java` 驱动包
 
 ## 快速入门
 
 - jdbc 使用步骤
-  1. 注册驱动
+  1. 注册驱动（首先需要引入 `mysql-connector-java` 驱动包）
   2. 获取数据库连接对象
   3. 定义 Sql 语句
   4. 获取执行 Sql 的对象 Statement
@@ -19,50 +20,62 @@
 
 ::: tip 1. 注册驱动
 
-``` java
+```java
 Class.forName("com.mysql.cj.jdbc.Driver")
 ```
+
 :::
 
 ::: tip 2. 获取数据库连接对象
 
-``` java
+```java
 Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/study?serverTimezone=UTC", "root", "root")
 ```
+
 :::
 
 ::: tip 3. 定义 Sql 语句
-``` java
+
+```java
 String sql = "update use set name='张三' where id=1";
 ```
+
 :::
 
 ::: tip 4. 获取执行 Sql 的对象 Statement
-``` java
+
+```java
 Statement stmt = conn.createStatement()
 ```
+
 :::
 
 ::: tip 5. 执行 Sql 语句
-``` java
+
+```java
 int count = stmt.executeUpdate(sql);
 ```
+
 :::
 
 ::: tip 6. 处理返回结果
-``` java
+
+```java
 System.out.println(count);
 ```
+
 :::
 
 ::: tip 7. 释放资源
-``` java
+
+```java
 stmt.close()
 conn.close()
 ```
+
 :::
 
-``` java
+```java
 Connection conn = null;
 Statement stmt = null;
 try {
@@ -107,57 +120,88 @@ try {
 }
 ```
 
-
 ## 常用类介绍
 
 ::: tip 1、DriverManager：驱动管理对象
 
-  - 注册驱动，指定数据库驱动 jar 包
-    * 通过代码注册驱动：`Class.forName("com.mysql.jdbc.Driver")`
-    * 查看源码发现：在`com.mysql.jdbc.Driver`类中存在静态代码块
-    ``` java
-    static {
-        try {
-            java.sql.DriverManager.registerDriver(new Driver());
-        } catch (SQLException E) {
-            throw new RuntimeException("Can't register driver!");
-        }
-    }
-    ```
-    * 注意：mysql5之后的驱动 jar 包可以省略注册驱动的步骤。
-  - 获取数据库连接
-    * 方法：`static Connection getConnection(String url, String user, String password)`
+- 注册驱动，指定数据库驱动 jar 包
+
+  - 通过代码注册驱动：`Class.forName("com.mysql.jdbc.Driver")`
+  - 查看源码发现：在`com.mysql.jdbc.Driver`类中存在静态代码块
+
+  ```java
+  static {
+      try {
+          java.sql.DriverManager.registerDriver(new Driver());
+      } catch (SQLException E) {
+          throw new RuntimeException("Can't register driver!");
+      }
+  }
+  ```
+
+  - 注意：mysql5 之后的驱动 jar 包可以省略注册驱动的步骤。
+  - 获取数据库连接方法：`static Connection getConnection(String url, String user, String password)`
+
 :::
 
 ::: tip 2、Connection：数据库连接对象
 
-  - 获取执行 Sql 的对象
-    * `Statement createStatement()`
-    * `PreparedStatement prepareStatement(String sql)`
+- 获取执行 Sql 的对象
 
-  - 管理事务
-    * 开启事务：`setAutoCommit(boolean autoCommit)`。调用该方法设置参数为false，即开启事务
-    * 提交事务：`commit()`
-    * 回滚事务：`rollback()`
+  - `Statement createStatement()`
+  - `PreparedStatement prepareStatement(String sql)`
+
+- 管理事务
+  - 开启事务：`setAutoCommit(boolean autoCommit)`。调用该方法设置参数为 false，即开启事务
+  - 提交事务：`commit()`
+  - 回滚事务：`rollback()`
 
 :::
 
-::: tip 3. Statement：Sql 执行对象
-  - 执行 Sql
-    * `int executeUpdate(String sql)`：执行DML（insert、update、delete）语句、DDL(create，alter、drop)语句
-    * `ResultSet executeQuery(string sql)`：执行 DQL（select）语句
+::: tip 3. Statement： 执行 “静态 Sql” 对象。拼接 Sql 有 Sql 注入的风险
+
+- 执行 Sql
+  _ `int executeUpdate(String sql)`：执行 DML（insert、update、delete）语句、DDL(create，alter、drop)语句
+  _ `ResultSet executeQuery(string sql)`：执行 DQL（select）语句
+
 :::
 
-::: tip 4. ResultSet：结果集对象
-``` java
+::: tip 4. ResultSet：结果集对象，封装查询结果
+
+- `getXxx(参数)`方法：从结果集中获取数据
+
+  - Xxx：代表数据类型。 如：String getString() 、 int getInt()，**数据类型最好跟数据库一致，不然可能会报错**
+  - 参数：
+    1. int: 代表列的编号，从 1 开始。 如：getString(1)
+    2. String：代表列的名称。 如：getString("name")
+
+- `Boolean next()方法`：判断游标是否是最后一行末尾，返回 false 则表示没有数据了，默认是指向表头
+
+```java
+String sql = "select * from user";
+ResultSet resultSet = stmt.executeQuery(sql);
+while (resultSet.next()) {
+		int id = resultSet.getInt("id");
+		String name = resultSet.getString("name");
+		System.out.println(id);
+		System.out.println(name);
+}
+```
+
+:::
+
+::: tip 5. PreparedStatement：执行 “动态 Sql” 的对象。 ，解决了 Statement Sql 注入的问题
+
+- SQL 注入：拼接 SQL 如果有一些特殊的关键字也参与了拼接，那么可能会造成安全问题：
+  - 输入用户随便，输入密码：b' or 'b' = 'b
+  - sql：select \* from user where username = 'fhdsjkf' and password = 'b' or 'b' = 'b'
+
+- 预编译SQL：参数使用 ？ 来作为占位符
+
+- 使用步骤：
+```java
 stmt.close()
 conn.close()
 ```
-:::
 
-::: tip 5. PreparedStatement：执行sql的对象
-``` java
-stmt.close()
-conn.close()
-```
-::: 
+:::
