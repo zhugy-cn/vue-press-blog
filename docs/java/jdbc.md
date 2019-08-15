@@ -198,10 +198,179 @@ while (resultSet.next()) {
 
 - 预编译SQL：参数使用 ？ 来作为占位符
 
-- 使用步骤：
+- setXxx(参数1，参数2)：获取数据
+  - 参数1：？的位置编号 从 1 开始
+  - 参数2：？的值
+
 ```java
-stmt.close()
-conn.close()
+String sql = "select * from user where name=? and password=?";
+// 这里返回的不是 Statement 了，这里需要把 Sql 传进去
+PreparedStatement pstmt = conn.prepareStatement(sql);
+// 给占位符（？）赋值
+pstmt.setString(1, 'root');   // name 的值
+pstmt.setString(2, 'root');   // password 的值
+pstmt.executeQuery();   // 这里不需要传入 Sql 了
 ```
 
 :::
+
+
+## 事务管理
+- 使用Connection对象来管理事务
+  - 开启事务：setAutoCommit(boolean autoCommit) ：调用该方法设置参数为 false，即开启事务  
+      - 在执行 sql 之前开启事务
+  - 提交事务：commit()   
+      - 当所有 sql 都执行完提交事务
+  - 回滚事务：rollback()   
+      - 在 catch 中回滚事务
+```java
+Connection conn = null;
+PreparedStatement pstmt1 = null;
+PreparedStatement pstmt2 = null;
+try {
+    conn = JDBCUtils.getConnection();
+    // 将事务设置成手动提交（开启事务）
+    conn.setAutoCommit(false);
+
+    String sql1 = "update user set money = money - ? where id = ?";
+    String sql2 = "update user set money = money + ? where id = ?";
+    pstmt1 = conn.prepareStatement(sql1);
+    pstmt2 = conn.prepareStatement(sql2);
+    // 给 Sql 赋值
+    pstmt1.setString(1, "500");
+    pstmt1.setString(2, "41");
+    pstmt2.setString(1, "500");
+    pstmt2.setString(2, "42");
+
+    pstmt1.executeUpdate();
+    int i = 2 % 0;
+    pstmt2.executeUpdate();
+
+    // 成功提交事务
+    conn.commit();
+} catch (SQLException e) {
+    try {
+        if (conn != null) {
+            // 失败回滚事务
+            System.out.println("rollback");
+            conn.rollback();
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    e.printStackTrace();
+} finally {
+    JDBCUtils.close(pstmt1, conn);
+    JDBCUtils.close(pstmt2, null);
+}
+```
+
+## 数据库连接池
+
+- 概念：就是一个存放数据库连接的容器。  
+当系统初始化好后，容器被创建，容器中会申请一些连接对象，当用户来访问数据库时，从容器中获取连接对象，用户访问完之后，会将连接对象归还给容器
+
+- 好处：
+  - 节约资源
+  - 用户访问高效
+
+- 实现
+  - 标准接口：DataSource（javax.sql.DataSource）  
+    - 获取连接：getConnection()
+    - 归还连接：Connection.close()。如果连接对象Connection是从连接池中获取的，那么调用Connection.close()方法，则不会再关闭连接了。而是归还连接
+
+
+## C3P0
+- 数据库连接池技术
+- 使用步骤
+  1. Maven添加依赖： `c3p0 和 mysql-connector-java`
+  2. 定义配置文件：文件名必须是 c3p0.properties 或者 c3p0-config.xml，会自动读取
+  3. 创建数据库连接池对象。 DataSource ds = new ComboPooledDataSource();
+  4. 获取连接。 Connection conn = ds.getConnection();
+
+- 代码示例：
+```xml
+<!-- c3p0-config.xml 文件配置 -->
+<c3p0-config>
+    <!-- 使用默认的配置读取连接池对象 -->
+    <default-config>
+        <!--  连接参数 -->
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/study?serverTimezone=UTC</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+
+        <!-- 连接池参数 -->
+        <!--初始化申请的连接数量-->
+        <property name="initialPoolSize">5</property>
+        <!--最大的连接数量-->
+        <property name="maxPoolSize">10</property>
+        <!--超时时间-->
+        <property name="checkoutTimeout">3000</property>
+    </default-config>
+
+    <named-config name="otherc3p0">
+        <!--  连接参数 -->
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/db3</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+
+        <!-- 连接池参数 -->
+        <property name="initialPoolSize">5</property>
+        <property name="maxPoolSize">8</property>
+        <property name="checkoutTimeout">1000</property>
+    </named-config>
+</c3p0-config>
+```
+```java
+// 1. 创建数据库连接池对象
+DataSource ds = new ComboPooledDataSource();
+// 2. 创建连接
+Connection conn = ds.getConnection();
+String sql = "update user set name='张三三' where id=42";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+int count = pstmt.executeUpdate();
+System.out.println(count);
+```
+
+
+##  Druid
+- 由阿里巴巴提供的数据库连接池技术
+
+- 使用步骤
+  1. Maven添加依赖：druid 和 mysql-connector-java 
+  2. 定义配置文件并导入。配置文件是 properties 形式的，可以叫任意名称
+  3. 加载 .properties 配置文件
+  4. 通过`DruidDataSourceFactory.createDataSource(properties)`工厂来获取数据库连接池对象。 
+  5. 获取连接
+
+- 代码示例
+```properties
+# druid.properties 配置文件
+driverClassName=com.mysql.cj.jdbc.Driver
+url=jdbc:mysql://127.0.0.1:3306/study?serverTimezone=UTC
+username=root
+password=root
+# 初始连接数量
+initialSize=5
+# 最大的连接数量
+maxActive=10
+# 超时时间
+maxWait=3000
+```
+```java
+// 1. 加载配置文件
+Properties properties = new Properties();
+InputStream inputStream = Demo1.class.getClassLoader().getResourceAsStream("druid.properties");
+properties.load(inputStream);
+// 2. 获取数据库连接池对象
+DataSource dataSource = DruidDataSourceFactory.createDataSource(properties);
+// 3. 获取数据库连接对象
+Connection conn = dataSource.getConnection();
+// 执行 sql
+String sql = "update user set name='王五五' where id=45";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+int count = pstmt.executeUpdate();
+System.out.println(count);
+```
