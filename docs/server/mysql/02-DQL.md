@@ -1,6 +1,6 @@
 # DQL
 
-## 1. 语法
+## 语法
 
 ```sql
 select
@@ -19,7 +19,7 @@ limit
     分页限定
 ```
 
-## 2. 基础查询
+## 基础查询
 
 ```sql
 -- 1. 多个字段的查询
@@ -38,7 +38,7 @@ SELECT DISTINCT age FROM `user`
 SELECT `name`, id + age AS total, id FROM `user`
 ```
 
-## 3. 条件查询
+## 条件查询
 
 ```sql
 1. > 、< 、<= 、>= 、= 、<>
@@ -89,7 +89,7 @@ SELECT `name`, id + age AS total, id FROM `user`
   SELECT * FROM `user` WHERE time IS NOT NULL
 ```
 
-## 4. 排序查询
+## 排序查询
 
 - 语法
 
@@ -114,7 +114,7 @@ SELECT * FROM `user` ORDER BY `age` DESC
 SELECT * FROM `user` ORDER BY `age` ASC, `money` DESC
 ```
 
-## 5. 聚合函数
+## 聚合函数
 
 - 示例（计算列）
 
@@ -138,7 +138,7 @@ SELECT AVG(age) FROM `user`
 - 注意
   1. 集合函数会排除`Null`值
 
-## 6. 分组查询
+## 分组查询
 
 - 语法
 
@@ -187,7 +187,7 @@ HAVING  -- 这后面只能放分组字段、聚合函数，不能放其他的字
   1. `where` 在分组之前进行限定，如果不满足条件，则不参与分组。`having`在分组之后进行限定，如果不满足结果，则不会被查询出来
   2. `where` 后不可以跟聚合函数，`having`可以进行聚合函数的判断。
 
-## 7. 分页查询
+## 分页查询
 
 > 公式：开始的索引 = （当前的页码 - 1） \* 每页显示的条数
 

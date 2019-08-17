@@ -2,16 +2,12 @@ module.exports = {
   // title: "学习前端",
   description: "Welcome to my blog",
   head: [["link", { rel: "icon", href: "/favicon.png" }]],
-  pageClass: "zhuguagyong",
   themeConfig: {
     sidebarDepth: 2,
     // 导航栏
     nav: [
       { text: "前端", link: "/basic/" },
       { text: "后端", link: "/server/" },
-      { text: "java", link: "/java/" },
-      { text: "数据库", link: "/database/" },
-      { text: "代码片段", link: "/snippet/" },
       {
         text: "在线文档",
         items: [
@@ -77,20 +73,40 @@ module.exports = {
       "/server/": [
         {
           title: "Mysql",
+          // collapsable: false,
           children: [
             "/server/mysql/01-DML",
             "/server/mysql/02-DQL",
             "/server/mysql/03-constraint",
             "/server/mysql/04-multi-table",
-            "/server/mysql/05-transaction"
+            "/server/mysql/05-transaction",
           ]
-        }
-      ],
-      // 后端
-      "/java/": [
+        },
         {
-          title: "JDBC",
-          children: ["/java/jdbc"]
+          title: "入门",
+          // collapsable: false,
+          children: [
+            "/server/java/jdbc",
+          ]
+        },
+        {
+          title: "MyBatis",
+          // collapsable: false,
+          children: [
+            "/server/mybatis/xml",
+            "/server/mybatis/annotation",
+          ]
+        },
+        {
+          title: "初级",
+          // collapsable: false,
+          children: [
+            "/server/java/mybatis",
+            "/server/java/spring",
+            "/server/java/spring-mvc",
+            "/server/java/spring-boot",
+            "/server/java/spring-cloud",
+          ]
         }
       ],
       // 代码片段
@@ -108,17 +124,6 @@ module.exports = {
           children: ["/snippet/css/", "/snippet/css/css1", "/snippet/css/css2"]
         }
       ],
-      // 数据库
-      "/database/": [
-        {
-          title: "工具",
-          children: ["/database/utils"]
-        },
-        {
-          title: "Mysql",
-          children: ["/database/mysql"]
-        }
-      ]
     }
   }
 };
