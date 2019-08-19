@@ -573,11 +573,12 @@ ofType="account"：
 当再次查询同样的数据时，mybatis 会先去 SqlSession 中查询是否有，有的话直接拿出来使用。  
 当 SqlSession 对象消失，mybatis 的一级缓存也就消失了
 
-- 一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除，commit()，close()等方法时，就会清空一级缓存。
+- 清空：一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除，commit()，close()等方法时，就会清空一级缓存。
 
 ### 二级缓存
 - 使用步骤
   1. 让 mybatis 框架开启二级缓存（SqlMapConfig.xml 中配置）
   2. 当前的映射文件开启二级缓存（IUserDao.xml 中配置）
   3. 让当前的操作支持二级缓存（select 标签中配置）
-- 指的是 mybatis 中的 SqlSessionFactory 对象的缓存，由同一个 SqlSessionFactory 对象创建的 SqlSession 共享其缓存
+- 指的是 mybatis 中的 SqlSessionFactory 对象的缓存，由同一个 SqlSessionFactory 对象创建的 SqlSession 共享其缓存、
+- 清空：
