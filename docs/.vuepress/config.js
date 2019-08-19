@@ -98,6 +98,13 @@ module.exports = {
           ]
         },
         {
+          title: "Spring",
+          // collapsable: false,
+          children: [
+            "/server/spring/01-basis",
+          ]
+        },
+        {
           title: "初级",
           // collapsable: false,
           children: [
