@@ -440,7 +440,8 @@ public class User {
     <result column="money" property="money"/>
     <!-- 用于指定从表方的引用实体属性的 -->
     <!--  这里的 property 对应的是实体类中的属性名称 -->
-    <association property="user">
+    <!--  这里的 javaType 对应的是实体类中的属性的类型 -->
+    <association property="user" javaType="user">
         <!-- 上面叫 id 了， 这里就不能再用 id 了。
         否则这里的值还是上面的Id。查询时起别名，跟别名一致  -->
         <id column="user_id" property="id"/>
@@ -562,6 +563,68 @@ ofType="account"：
 - 立即加载：不管用不用，只要一调用，立即查询
   多对一、一对一：通常采用立即加载
   一对多、多对多：通常采用延迟加载
+
+- 使用之前需要配置
+```xml
+<!-- SqlMapConfig.xml 里面配置 -->
+<!-- 配置延迟加载 -->
+<settings>
+    <!-- 开启 mybatis 支持延迟加载-->
+    <setting name="lazyLoadingEnabled" value="true"/>
+    <!-- 默认是 false ，可以不配 -->
+    <setting name="aggressiveLazyLoading" value="false"/>
+</settings>
+```
+
+### 效果展示
+- 开启前  
+![inheritAttrs: true](./images/mysql-delay-01.png)
+- 开启后使用了 User  
+![inheritAttrs: true](./images/mysql-delay-02.png)
+- 开启后没有使用 User  
+![inheritAttrs: true](./images/mysql-delay-03.png)
+
+
+### 一对一实现
+```xml
+<!--  延迟加载  -->
+<resultMap id="accountUserDelay" type="account">
+    <id column="id" property="id"/>
+    <result column="uid" property="uid"/>
+    <result column="money" property="money"/>
+    <!--
+        column: 需要传给 select 属性配置的方法的参数
+        select: 查询用户的方法,全限定类名
+        property: 实体类中属性名称
+        javaType: 属性的类型
+      -->
+    <association
+            column="uid"
+            property="user"
+            javaType="user"
+            select="cn.zhugy.mybatis.dao.IUserDao.findUserById"/>
+</resultMap>
+<select id="findAllContainUserDelay" resultMap="accountUserDelay">
+    select * from account
+</select>
+```
+### 一对多实现
+```xml
+<resultMap id="userAccountDelay" type="user">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="birthday" property="birthday"/>
+    <result column="address" property="address"/>
+    <collection
+            column="id"
+            property="accounts"
+            ofType="account"
+            select="cn.zhugy.mybatis.dao.IAccountDao.findByUid"/>
+</resultMap>
+<select id="findAllContainAccountDelay" resultMap="userAccountDelay">
+    select * from user
+</select>
+```
 
 ## 缓存
 - 减少和数据库的交互次数，提高执行效率，
