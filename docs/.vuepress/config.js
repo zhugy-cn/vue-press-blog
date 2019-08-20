@@ -6,7 +6,7 @@ module.exports = {
     sidebarDepth: 2,
     // 导航栏
     nav: [
-      { text: "前端", link: "/basic/" },
+      { text: "前端", link: "/web/" },
       { text: "后端", link: "/server/" },
       {
         text: "在线文档",
@@ -34,8 +34,7 @@ module.exports = {
             link: "https://www.caniuse.com/#search=promise"
           },
           { text: "经纬度查询", link: "http://www.gpsspg.com/maps.htm" },
-          { text: "在线工具", link: "https://tool.lu/" },
-          { text: "谷歌访问助手", link: "http://www.ggfwzs.com/" }
+          { text: "在线工具", link: "https://tool.lu/" }
         ]
       },
       { text: "github", link: "https://github.com/zhugy-cn" }
@@ -43,30 +42,23 @@ module.exports = {
     // 侧边栏
     sidebar: {
       // 前端
-      "/basic/": [
+      "/web/": [
         {
           title: "Vue",
-          children: ["/basic/vue/", "/basic/vue/vue-2", "/basic/vue/vue-1"]
-        },
-        {
-          title: "JavaScript",
           children: [
-            "/basic/javascript/",
-            "/basic/javascript/array",
-            "/basic/javascript/string"
+            "/web/vue/lifecycle",
+            "/web/vue/vue-1",
+            "/web/vue/vue-2",
+            "/web/vue/optimize"
           ]
         },
         {
-          title: "CSS",
-          children: ["/basic/css/", "/basic/css/css1", "/basic/css/css2"]
+          title: "JavaScript",
+          children: ["/web/javascript/array", "/web/javascript/string"]
         },
         {
-          title: "DCloud",
-          children: ["/basic/DCloud/DCloud1", "/basic/DCloud/mui1"]
-        },
-        {
-          title: "浏览器",
-          children: ["/basic/browser/"]
+          title: "基础",
+          children: ["/web/browser"]
         }
       ],
       // 后端
@@ -79,41 +71,23 @@ module.exports = {
             "/server/mysql/02-DQL",
             "/server/mysql/03-constraint",
             "/server/mysql/04-multi-table",
-            "/server/mysql/05-transaction",
+            "/server/mysql/05-transaction"
           ]
         },
         {
           title: "入门",
           // collapsable: false,
-          children: [
-            "/server/java/jdbc",
-          ]
+          children: ["/server/java/jdbc"]
         },
         {
           title: "MyBatis",
           // collapsable: false,
-          children: [
-            "/server/mybatis/xml",
-            "/server/mybatis/annotation",
-          ]
+          children: ["/server/mybatis/xml", "/server/mybatis/annotation"]
         },
         {
           title: "Spring",
           // collapsable: false,
-          children: [
-            "/server/spring/01-basis",
-          ]
-        },
-        {
-          title: "初级",
-          // collapsable: false,
-          children: [
-            "/server/java/mybatis",
-            "/server/java/spring",
-            "/server/java/spring-mvc",
-            "/server/java/spring-boot",
-            "/server/java/spring-cloud",
-          ]
+          children: ["/server/spring/01-basis"]
         }
       ],
       // 代码片段
@@ -130,7 +104,7 @@ module.exports = {
           title: "CSS",
           children: ["/snippet/css/", "/snippet/css/css1", "/snippet/css/css2"]
         }
-      ],
+      ]
     }
   }
 };
