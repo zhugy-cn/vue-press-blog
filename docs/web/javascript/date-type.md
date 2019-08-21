@@ -1,6 +1,6 @@
 # 数据类型
 
-## 一、分类
+## 分类
 
 - 在“JavaScript”规范中，共定义了七种数据类型，分为“基本类型”和“引用类型”两大类
 
@@ -8,7 +8,7 @@
 
   - 引用类型（一种）：对象（Object），对象又包含了 Object、Function、Array、Date、RegExp 等
 
-## 二、基本包装类型
+## 基本包装类型
 
 > 基本包装类型有 String、Number、Boolean
 
@@ -49,7 +49,7 @@ String.prototype.age = 24; // 在原型上添加
 console.log(str.age); // 24
 ```
 
-## 三、数据类型检测
+## 数据类型检测
 
 ```js
 let s1 = 1;

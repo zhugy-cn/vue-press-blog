@@ -45,6 +45,7 @@ module.exports = {
       "/web/": [
         {
           title: "Vue",
+          collapsable: false,
           children: [
             "/web/vue/lifecycle",
             "/web/vue/vue-1",
@@ -54,6 +55,7 @@ module.exports = {
         },
         {
           title: "JavaScript",
+          collapsable: false,
           children: [
             "/web/javascript/executing",
             "/web/javascript/date-type",
@@ -66,6 +68,7 @@ module.exports = {
         },
         {
           title: "基础",
+          collapsable: false,
           children: ["/web/browser"]
         }
       ],
@@ -84,35 +87,20 @@ module.exports = {
         },
         {
           title: "入门",
-          // collapsable: false,
+          collapsable: false,
           children: ["/server/java/jdbc"]
         },
         {
           title: "MyBatis",
-          // collapsable: false,
+          collapsable: false,
           children: ["/server/mybatis/xml", "/server/mybatis/annotation"]
         },
         {
           title: "Spring",
-          // collapsable: false,
+          collapsable: false,
           children: ["/server/spring/01-basis"]
         }
       ],
-      // 代码片段
-      "/snippet/": [
-        {
-          title: "JavaScript",
-          children: [
-            "/snippet/javascript/",
-            "/snippet/javascript/javascript1",
-            "/snippet/javascript/javascript2"
-          ]
-        },
-        {
-          title: "CSS",
-          children: ["/snippet/css/", "/snippet/css/css1", "/snippet/css/css2"]
-        }
-      ]
     }
   }
 };

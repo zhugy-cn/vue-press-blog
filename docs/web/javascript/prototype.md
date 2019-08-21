@@ -1,6 +1,6 @@
 # 原型链
 
-## 一、创建对象的几种方法
+## 创建对象的几种方法
 
 - 对象字面量
 
@@ -29,11 +29,11 @@ let o4 = Object.create(P); // 自身没有name属性，在原型链上，用原�
 o4.__proto__; //  {name: "o4"}
 ```
 
-## 二、原型对象、构造函数、实例
+## 原型对象、构造函数、实例
 
 ![inheritAttrs: true](./images/prototype_01.jpg)
 
-### 原型对象、构造函数、实例三者的关系
+- 原型对象、构造函数、实例三者的关系
 
 1. `prototype`：隐式原型，返回的是对象，无论在什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个`prototype`属性，这个属性指向函数的原型对象，**只有函数对象才有`prototype`属性**，普通对象没有
 
@@ -136,7 +136,7 @@ Function.__proto__ === Function.__proto__; // true
 
 ![inheritAttrs: true](./images/prototype_02.png)
 
-## 三、instanceof 原理
+## instanceof 原理
 
 - 用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
 
@@ -163,7 +163,7 @@ A instanceof B   判断 A 对象的原型链上有没有 B 的原型对象
 [].constructor === Object  // false
 ```
 
-## 四、new 运算符
+## new 运算符
 
 1. 一个新对象被创建，他继承自 foo.prototype
 

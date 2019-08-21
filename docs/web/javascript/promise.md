@@ -1,12 +1,12 @@
 # Promise
 
-## 一、是什么
+## 是什么
 
 1. 主要用于异步计算
 2. 可以将异步操作队列化，按照期望的顺序执行，返回符合预期的结果
 3. 可以在对象之间传递和操作 Promise，帮助我们处理队列
 
-## 二、示例
+## 示例
 
 ```js
 new Promise(
@@ -35,7 +35,7 @@ new Promise(
 - Promise 状态发生改变，就会触发.then()里的响应函数处理后续步骤
 - Promise 状态一经改变，不会再变
 
-## 三、.then()
+## .then()
 
 - .then()接受两个函数作为参数，分别代表 fulfilled 和 rejected
 - .then()返回一个新的 Promise 实例，所以它可以链式调用
@@ -44,13 +44,13 @@ new Promise(
 - 如果返回新的 Promise，那么下一级.then()会在新的 Promise 状态改变后执行
 - 如果返回的时其他的任何值，则会立刻执行下一级.then()
 
-## 四、.then()里有.then()的情况
+## .then()里有.then()的情况
 
 - 因为.then()返回的还是 Promise 实例
 - 会等里面的.then()执行完，再执行外面的
 - 对于我们来说，此时最好将其展开，会更好读
 
-## 五、Promise.all()
+## Promise.all()
 
 - 它接受一个数组作为参数
 - 数组里可以是 Promise 对象，也可以是别的值，只有 Promise 会等待状态改变

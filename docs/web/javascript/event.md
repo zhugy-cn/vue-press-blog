@@ -1,29 +1,29 @@
-# 事件
+# DOM事件
 
-## 一、DOM 事件的级别
+## DOM 事件的级别
 
-### 1. DOM0 级
+### DOM0 级
 
 - 写法：`element.onclick=function(){}`或者或者`element.onclick=btnclick`是一种比较传统的方式，把一个函数(或者匿名函数)赋值给一个事件的处理程序属性
 - 优点：简单，跨浏览器的优势（兼容所有浏览器）。
 - 缺点：不能给元素添加多个事件处理程序，只能添加一个，如果添加多个事件处理程序，后面的会覆盖前面的。
 - 删除事件：`element.onclick=null`;
 
-### 2. DOM1 级
+### DOM1 级
 
 - DOM1 级主要隐射文档没有事件，没有设计跟事件相关的东西，所以跳过，但是 DOM1 级标准还是存在
 
-### 3. DOM2 级
+### DOM2 级
 
 - 写法：`element.addEventListener('click',function(){},false)`false 为默认值，代表支持冒泡
 - 优点，可以给元素添加多个事件处理程序，这些事件处理程序按照他们的顺序执行。
 - 删除事件：`element.removeEventListener('click',function(){},false)`
 
-### 4. DOM3 级
+### DOM3 级
 
 - 写法：跟 DOM2 级一样，就是增加了许多事件类型，包括鼠标事件，键盘事件
 
-#### 二、事件模型
+## 事件模型
 
 ![inheritAttrs: true](./images/event_01.png)
 
@@ -31,7 +31,7 @@
 - 捕获是从上往下到达目标元素
 - 冒泡是从当前元素，也就是目标元素往上到 window。是两个过程
 
-## 三、事件流
+## 事件流
 
 ![inheritAttrs: true](./images/event_02.png)
 
@@ -42,7 +42,7 @@
   2. 第二阶段是目标阶段：比如点击的这个按钮，这个按钮就是目标阶段，事件通过捕获到达目标元素，就到达了目标阶段
   3. 第三个阶段是冒泡阶段：从目标元素再上传到 window 对象，就是冒泡的过程
 
-## 四、DOM 事件捕获冒泡的具体流程
+## DOM 事件捕获冒泡的具体流程
 
 ![inheritAttrs: true](./images/event_03.png)
 
@@ -60,7 +60,7 @@
   3. 然后接收的是 body 标签 —> html 标签 —> document 对象
   4. 最后一个接收的是 window 对象。
 
-## 五、Event 事件对象
+## Event 事件对象
 
 - 在触发 DOM 上的事件时都会产生一个对象，这个就是事件对象 Event
 - Event 对象常用应用
@@ -72,7 +72,7 @@
   - `event.target.nodeName`获取触发事件元素的名字，如 P(大写)
   - `event.type`获取绑定的事件类型，比如 click，mouseover 等
 
-## 六、自定义事件
+## 自定义事件
 
 - 所谓自定义事件，就是有别于带有浏览器特定行为的事件（类似 click、mouseover、submit、keydown），事件名称可以随意定义，可以通过特定的方法进行添加、触发以及删除。
 
@@ -85,7 +85,7 @@ dom.dispatchEvent(eve)  // 触发事件
 CustomEvent：也可以自定义事件，还可以自定义参数
 ```
 
-## 七、代码演示
+## 代码演示
 
 ```js
 window.addEventListener(
