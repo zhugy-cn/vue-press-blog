@@ -54,7 +54,15 @@ module.exports = {
         },
         {
           title: "JavaScript",
-          children: ["/web/javascript/array", "/web/javascript/string"]
+          children: [
+            "/web/javascript/executing",
+            "/web/javascript/date-type",
+            "/web/javascript/event",
+            "/web/javascript/prototype",
+            "/web/javascript/extends",
+            "/web/javascript/promise",
+            "/web/javascript/array"
+          ]
         },
         {
           title: "基础",
