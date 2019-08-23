@@ -67,7 +67,12 @@ module.exports = {
           ]
         },
         {
-          title: "基础",
+          title: "写代码",
+          collapsable: false,
+          children: ["/web/code/call"]
+        },
+        {
+          title: "其他",
           collapsable: false,
           children: ["/web/browser"]
         }
@@ -100,7 +105,7 @@ module.exports = {
           collapsable: false,
           children: ["/server/spring/01-basis"]
         }
-      ],
+      ]
     }
   }
 };
