@@ -33,7 +33,7 @@
 3. 使用类（工厂）中的**方法**创建对象，并存入 Spring 容器
 
 ```xml
-<bean id="instancFactory" class="com.itheima.factory.InstanceFactory" />
+<bean id="instancFactory" class="cn.zhugy.factory.InstanceFactory" />
 <bean id="accountService" factory-bean="instancFactory" factory-method="createAccountService" />
 ```
 
@@ -124,3 +124,51 @@
 ```
 
 3. 使用注解注入
+
+<!-- 新内容 start -->
+
+## 其他注解
+
+- `@Configuration`：指定当前类是一个 spring 配置类，当创建容器时会从该类上加载注解。获取容器时需要使用：  
+  `AnnotationApplicationContext (有@Configuration 注解的类.class)`。
+
+- `@ComponentScan`：用于指定 spring 在初始化容器时要扫描的包。作用和在 spring 的 xml 配置文件中的：  
+  `<context:component-scan base-package="cn.zhugy"/>` 是一样的。
+
+- `@Bean`：该注解只能写在方法上，表明使用此方法创建一个 Bean 对象，并且放入 spring 容器。  
+  属性：name：用于指定 Bean 的 Id ， 当不写时，默认值是当前方法的名称  
+  注意：当使用注解配置方法时，如果方法有参数，spring 框架会去容器中查找可用的 bean 对象
+
+- `@Import`：用于导入其他配置类，在引入其他配置类时，可以不用再写 `@Configuration` 注解。
+
+- `@PropertySource`：用于加载.properties 文件中的配置。如果是在类路径下，需要写上 classpath:。
+
+## 整合 Junit
+
+1. 导入 jar 包 `spring-test`
+2. 使用 Junit 提供的注解把原有的 main 方法替换成 spring 提供的
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+public class AccountServiceTest {
+  ...
+}
+```
+
+3. 告知 spring 运行器，spring 和 ioc 创建是基于 xml 还是注解，并且指定位置
+
+```java
+
+// locations 属性：用于指定配置文件的位置。如果是类路径下，需要用 classpath:表明
+// classes 属性：用于指定注解的类。当不使用 xml 配置时，需要用此属性指定注解类的位置。
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= {"classpath:bean.xml"})
+public class AccountServiceTest {
+  ...
+}
+```
+
+4. 使用 `@Autowired` 给测试类中的变量注入数据
+
+<!-- 新内容 end -->
