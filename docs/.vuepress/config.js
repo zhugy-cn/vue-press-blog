@@ -69,7 +69,11 @@ module.exports = {
         {
           title: "写代码",
           collapsable: false,
-          children: ["/web/code/call"]
+          children: [
+            "/web/code/call",
+            "/web/code/throttle",
+            "/web/code/debounce"
+          ]
         },
         {
           title: "其他",

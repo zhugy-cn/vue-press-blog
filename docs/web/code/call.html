@@ -1,44 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      Function.prototype.myCall = function(context) {
-        // context == undefined 也就相当于 context == undefined || context == null
-        context = context == undefined ? window : Object(context);
-        let args = [...arguments].slice(1);
-        let fn = Symbol(); // 防止重复被覆盖
-        context[fn] = this;
-        let result = context[fn](...args);
-        delete context[fn];
-        return result;
-      };
 
-      var value = 10;
-      var foo = {
-        value: 1
-      };
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+<style>
+  .box {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+  }
+</style>
 
-      function bar(a, b) {
-        console.log(this.value); // 1   当传 null 和 undefined 时这里的值为 10
-        console.log(a); // 10
-        console.log(b); // 20
-        return a + b;
+<body>
+
+  <div class="box" id="box"></div>
+
+  <script>
+    let box = document.getElementById('box')
+    box.addEventListener('mousemove', throttle(handleFn, 500))
+
+    function handleFn(event) {
+      console.log(111);
+      console.log(this);
+      console.log(event);
+    }
+
+
+    function throttle1(fn, wait) {
+      let timer;
+      return function () {
+        if (!timer) {
+          timer = setTimeout(() => {
+            timer = null;
+            fn.apply(this, arguments)
+          }, wait)
+        }
+      }
+    }
+
+    function throttle2(fn, wait) {
+      let previous = 0;
+      return function () {
+        let now = +new Date()
+        if (now - previous >= wait) {
+          previous = now;
+          fn.apply(this, arguments)
+        }
+      }
+    }
+
+
+    function throttle(fn, wait) {
+      let timer;
+      let previous = 0;
+      let throttle = function () {
+        
+        let now = +new Date()
+        if (now - previous >= wait) {
+          previous = now;
+          fn.apply(this, arguments)
+        }
+        
       }
 
-      bar.myCall(null); // 这里的 this 指向 window
-      bar.myCall(undefined); // 这里的 this 指向 window
-      bar.myCall(0);
-      bar.myCall("");
-      bar.myCall(true);
-      // 测试返回值
-      let sum = bar.myCall(foo, 10, 20);
-      console.log(sum); // 30
-    </script>
-  </body>
+      
+
+      return throttle;
+    }
+
+
+
+
+  </script>
+</body>
+
 </html>

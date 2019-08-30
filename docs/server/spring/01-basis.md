@@ -1,14 +1,90 @@
 # spring 的概念
 
-## 体系结构
-
-### IOC
+## IOC
 
 - IOC：Inversion Of Control（控制反转），降低程序之间的耦合（依赖关系）
 
 - 依赖关系的管理：都交给 Spring 来维护，当当前类需要用到其他类时（产生依赖关系），只需要在配置文件（依赖注入）中加已说明，Spring 就会根据配置文件来提供所依赖的类
 
+
+
+## 实现 Bean 工厂
+- bean.properties
+```properties
+accountService=cn.zhugy.service.impl.AccountServiceImpl
+accountDao=cn.zhugy.dao.impl.AccountDaoImpl
+```
+- 工厂模式
+```java
+/*
+ *   1. 需要一个配置文件来配置 service 和 dao
+ *       配置的内容：全限定类名
+ *
+ *   2. 通过读取配置文件中配置的内容，反射创建对象
+ * */
+public class BeanFactory {
+    private static Properties props;
+
+    // 定义一个 map，用于存放要创建的对象，称为容器
+    private static Map<String, Object> beans;
+
+    static {
+        try {
+            // 加载配置文件
+            props = new Properties();
+            InputStream in = BeanFactory.class.getClassLoader().getResourceAsStream("bean.properties");
+            props.load(in);
+
+            // 单例模式
+            beans = new HashMap<String, Object>();
+            // 取出配置文件中所有的 key
+            Enumeration keys = props.keys();
+            while (keys.hasMoreElements()) {
+                // 取出每个 key
+                String key = keys.nextElement().toString();
+                // 根据 key 获取 value
+                String beanPath = props.getProperty(key);
+                // 反射创建对象
+                Object value = Class.forName(beanPath).newInstance();
+                // 把 key 和 value 存入容器中
+                beans.put(key, value);
+            }
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError("初始化 properties 失败");
+        }
+    }
+
+    // 根据 bean 的名称获取 bean
+    public static Object getBean(String beanName) {
+        return beans.get(beanName);
+    }
+}
+```
+
+## ApplicationContext
+- `ApplicationContext`（核心容器）的三个实现类
+  1. `ClassPathXmlApplicationContext`：加载类路径下的文件创建容器
+  2. `FileSystemXmlApplicationContext`：加载磁盘任意路径下的配置文件创建容器
+  3. `AnnotationConfigApplicationContext`：读取注解创建容器
+
+
+- 核心容器的两个接口
+  1. ApplicationContext：单例对象适用  
+    在构建核心容器时，采取立即加载的方式，只要一读完配置文件就马上创建配置的 Bean 对象
+
+  2. BeanFactory：多例对象适用    
+    在构建核心容器时，采取延迟加载的方式，什么时候根据 ID 获取对象了，就什么时候创建 Bean 对象
+  
+
+
 ## Bean 标签
+- 获取 Bean 对象步骤
+```java
+// 1. 获取核心容器
+ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+// 2. 根据 ID 获取 bean 对象
+IAccountService as = (IAccountService) ac.getBean("accountService");
+```
 
 ### 创建 Bean 对象的三种方式
 
@@ -30,9 +106,10 @@
 
 ```
 
-3. 使用类（工厂）中的**方法**创建对象，并存入 Spring 容器
+3. 使用类（工厂）中的**普通方法**创建对象，并存入 Spring 容器
 
 ```xml
+<!-- 使用 instancFactory 对象中的 createAccountService 方法创建对象 -->
 <bean id="instancFactory" class="com.itheima.factory.InstanceFactory" />
 <bean id="accountService" factory-bean="instancFactory" factory-method="createAccountService" />
 ```
@@ -124,3 +201,32 @@
 ```
 
 3. 使用注解注入
+
+## 基于注解环境
+### 创建对象
+- `@Component`  
+  - 作用：把当前类对象存入 Spring 容器中  
+  - 属性：  
+      value：用于指定 Bean 的 ID，当不写时，默认值是当前类名，首字母小写  
+
+- 这三个注解作用属性与 @Component 一样，只是语义化更好  
+  `@Controller`：用在表现层  
+  `@Service`：用于业务层  
+  `@Repository`：用于持久层  
+
+### 注入数据
+- `@Autowired`：自当按照类型注入，只要容器中有唯一的一个 Bean 对象类型和要注入的变量类型匹配，就可以成功注入
+- `@Qualifier`：在按照类中注入的基础上再按照名称注入（和 Autowired 配合）。在给类成员注入时不能单独使用，但是在给方法参数注入时可以
+- `@Resource`：不依托于 Autowired ，但是属性不是 value 了，而是 name
+
+以上三个注解只能注入 bean 类型的数据，不能注入基本类型和 String 类型，另外，集合类型只能通过 xml 注入
+
+- `@Value`：用于注入基本类型和 String 类型的数据  
+
+
+### 改变范围
+- `@Scope`：用于指定 bean 的作用范围
+
+### 生命周期
+- `@PostConstruct`：用于指定销毁方法
+- `@Repository`：用于指定初始化方法
