@@ -201,7 +201,7 @@ IAccountService as = (IAccountService) ac.getBean("accountService");
 
 3. 使用注解注入
 
-## 基于注解环境
+## 常用注解
 ### 创建对象
 - `@Component`  
   - 作用：把当前类对象存入 Spring 容器中  
@@ -276,3 +276,243 @@ public class AccountServiceTest {
 4. 使用 `@Autowired` 给测试类中的变量注入数据
 
 <!-- 新内容 end -->
+
+
+## AOP
+- AOP：全称是 Aspect Oriented Programming。 即：面向切面编程。简单的说它就是把我们程序重复的代码抽取出来，在需要执行的时候，使用**动态代理**的技术，在不修改源码的基础上，对我们的已有方法进行增强。
+
+## 基于 XML 的 AOP 配置
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+    <!--  配置 spring 的 IOC  -->
+    <bean id="accountService" class="cn.zhugy.service.impl.AccountServiceImpl"/>
+    <!--  spring 基于 XML 配置步骤
+
+        1. 把通知的 bean（Logger类） 也交给 spring 管理
+        2. 使用 aop:config 标签表明开始 AOP 的配置
+        3. 使用 aop:aspect 标签表明配置切面
+            id属性：给切面提供一个唯一标识
+            ref属性：指定通知类 bean 的 id
+        4. 在 aop:aspect 标签内部使用对应标签来配置通知的类型
+            aop:before：配置前置通知
+                method属性：指定 Logger 类中的哪个方法是前置通知
+                pointcut属性：指定切入点表达式，用来表示对哪些方法增强
+                切入点表达式写法：execution（表达式）
+                表达式写法：访问修饰符 返回值 包名.包名.包名...类名.方法名(参数列表)
+                  示例：
+                      public void cn.zhugy.service.impl.AccountServiceImpl.saveAccount()
+                  全通配方法：
+                      * *..*.*(..)
+                  实际开发切入点表达式常用写法：
+                      * cn.zhugy.service.impl.*.*(..)
+    -->
+    <!--  1. 配置 logger 类  -->
+    <bean id="logger" class="cn.zhugy.utils.Logger"/>
+    <!--  2. 配置 AOP  -->
+    <aop:config>
+        <!-- 3. 配置切面 -->
+        <aop:aspect id="logAdvice" ref="logger">
+            <!-- 4. 配置通知类型 -->
+            <aop:before method="printLog" pointcut="execution(* cn.zhugy.service.impl.*.*(..))"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
+```
+
+## 四种通知类型
+```xml
+<aop:aspect id="logAdvice" ref="logger">
+    <!-- 4. 配置通知类型 -->
+
+    <!-- 配置公共的切入点表达式。还可以写在 aop:aspect 标签外面（aop:aspect 标签之前） -->
+    <aop:pointcut id="pt1" expression="execution(* cn.zhugy.service.impl.*.*(..))"/>
+    <!-- 前置通知：切入点方法执行前执行 -->
+    <aop:before method="beforePrintLog" pointcut-ref="pt1"/>
+    <!-- 后置通知：切入点方法正常执行后执行，和异常通知只能执行一个 -->
+    <aop:after-returning method="afterPrintLog" pointcut-ref="pt1"/>
+    <!-- 异常通知：切入点方法执行产生异常后执行 -->
+    <aop:after-throwing method="throwPrintLog" pointcut-ref="pt1"/>
+    <!-- 最终通知：无论切入点方法是否有异常都会执行 -->
+    <aop:after method="lastPrintLog" pointcut-ref="pt1"/>
+    <!-- 环绕通知
+        当配置了环绕通知后，需要有返回值，否则切入点方法不会执行
+      -->
+    <aop:around method="aroundPrintLog" pointcut-ref="pt1"/>
+
+</aop:aspect>
+```
+- 环绕通知
+```java
+// 环绕通知，可以手动写前置，后置等通知
+public Object aroundPrintLog(ProceedingJoinPoint pjp) {
+    Object rtValue = null;
+    try {
+        Object[] args = pjp.getArgs();  // 方法执行所需参数
+        rtValue = pjp.proceed(args);  // 明确调用切入点方法
+        System.out.println("环绕通知（aroundPrintLog）方法执行了..."); // 写在 pjp.proceed 后面就是后置通知
+    } catch (Throwable throwable) {
+        throwable.printStackTrace();
+    }finally {
+
+    }
+    return rtValue;
+}
+```
+
+## 基于注解配置AOP
+> 注意：注解配置通知执行时调用的顺序有问题，最终通知 执行 在 后置（异常）通知之前
+- 配置文件
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd ">
+
+
+    <!--  配置 spring 创建容器时要扫描的包  -->
+    <context:component-scan base-package="cn.zhugy"/>
+
+    <!--  配置 spring 开启注解 AOP 的支持  -->
+    <aop:aspectj-autoproxy/>
+</beans>
+```
+- 切面类
+```java
+
+@Component("logger")
+@Aspect // 表示当前类是一个切面
+public class Logger {
+    // 切入点表达式
+    @Pointcut("execution(* cn.zhugy.service.impl.*.*(..))")
+    private void pt1() {}
+    // 前置通知
+    @Before("pt1()")
+    public void beforePrintLog() {
+        System.out.println("前置通知（beforePrintLog）方法执行了1...");
+    }
+
+    // 后置通知
+    @AfterReturning("pt1()")
+    public void afterPrintLog() {
+        System.out.println("后置通知（afterPrintLog）方法执行了2...");
+    }
+
+    // 异常通知
+    @AfterThrowing("pt1()")
+    public void throwPrintLog() {
+        System.out.println("异常通知（throwPrintLog）方法执行了3...");
+    }
+
+    // 最终通知
+    @After("pt1()")
+    public void lastPrintLog() {
+        System.out.println("最终通知（lastPrintLog）方法执行了4...");
+    }
+
+    // 环绕通知，可以手动写前置，后置等通知
+    @Around("pt1()")
+    public Object aroundPrintLog(ProceedingJoinPoint pjp) {
+        Object rtValue = null;
+        try {
+            Object[] args = pjp.getArgs();  // 方法执行所需参数
+            rtValue = pjp.proceed(args);  // 明确调用切入点方法
+            System.out.println("环绕通知（aroundPrintLog）方法执行了..."); // 写在 pjp.proceed 后面就是后置通知
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } finally {
+
+        }
+        return rtValue;
+    }
+}
+
+```
+
+## Spring 中的事务
+### 基于 XML 配置
+```xml
+<!-- 配置数据源-->
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://127.0.0.1:3306/study?serverTimezone=UTC"/>
+    <property name="username" value="root"/>
+    <property name="password" value="root"/>
+</bean>
+<!-- spring 中基于 xml 的声明式事务控制配置步骤
+    1. 配置事务管理器
+    2. 配置事务的通知
+        id 属性：事务通知唯一标识
+        transaction-manager 属性：给事务通知提供一个事务管理器引用
+    3. 配置 AOP
+    4. 配置公共的切入点表达式
+    5. 建立事务通知和切入点表达式的对应关系
+    6. 配置事务的属性：配置在事务的通知 tx:advice 标签的内部
+        isolation：事务的隔离级别，默认值 DEFAULT ，表示使用数据库的默认隔离级别
+        propagation：事务的传播行为，默认值 REQUIRED 表示一定会有事务。查询可以选择 SUPPORTS。
+        read-only：事务是否只读，默认值 false，只有查询方法才能设置为 true，
+        timeout：事务的超时时间，默认 -1，表示永不超时，如果指定了数值，则以秒为单位
+        rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其它异常时，事务不回滚，没有默认值，表示所有异常都回滚
+        no-rollback-for：用于指定一个异常，产生该异常时，事务不回滚，产生其它异常时事务回滚，没有默认值，表示所有异常都回滚
+
+  -->
+<!-- 1. 配置事务管理器 -->
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+</bean>
+<!-- 2. 配置事务的通知 -->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <!-- 6. 配置事务的属性 -->
+    <tx:attributes>
+        <!-- 增删改 -->
+        <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false" />
+        <!-- 查询 -->
+        <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+    </tx:attributes>
+</tx:advice>
+<!-- 3. 配置 aop -->
+<aop:config>
+    <!-- 4. 配置公共的切入点表达式 -->
+    <aop:pointcut id="pt1" expression="execution(* cn.zhugy.service.impl.*.*(..))"/>
+    <!-- 5. 建立关系 -->
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"/>
+</aop:config>
+```
+
+### 基于注解
+```xml
+<!-- 配置数据源-->
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://127.0.0.1:3306/study?serverTimezone=UTC"/>
+    <property name="username" value="root"/>
+    <property name="password" value="root"/>
+</bean>
+
+<!-- spring 中基于 注解 的声明式事务控制配置步骤
+    1. 配置事务管理器
+    2. 开启 spring 对注解事务的支持
+    3. 在需要事务支持的地方使用 @Transactional 注解
+  -->
+<!-- 1. 配置事务管理器 -->
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+</bean>
+<!-- 2. 开启事务支持 -->
+<tx:annotation-driven transaction-manager="transactionManager"/>
+
+```

@@ -108,6 +108,11 @@ module.exports = {
           title: "Spring",
           collapsable: false,
           children: ["/server/spring/01-basis"]
+        },
+        {
+          title: "SpringMVC",
+          collapsable: false,
+          children: ["/server/springMVC/01-basis"]
         }
       ]
     }
