@@ -118,9 +118,10 @@ module.exports = {
       ],
       "/ui-frame/": [
         {
-          title:'PC端',
+          title: 'PC端',
           collapsable: false,
-          children:[
+          sidebarDepth: 0,
+          children: [
             "/ui-frame/pc/backbar"
           ]
         }
