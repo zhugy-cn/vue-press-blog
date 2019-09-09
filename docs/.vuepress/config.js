@@ -8,6 +8,7 @@ module.exports = {
     nav: [
       { text: "前端", link: "/web/" },
       { text: "后端", link: "/server/" },
+      { text: "UI框架", link: "/ui-frame/" },
       {
         text: "在线文档",
         items: [
@@ -113,6 +114,15 @@ module.exports = {
           title: "SpringMVC",
           collapsable: false,
           children: ["/server/springMVC/01-basis"]
+        }
+      ],
+      "/ui-frame/": [
+        {
+          title:'PC端',
+          collapsable: false,
+          children:[
+            "/ui-frame/pc/backbar"
+          ]
         }
       ]
     }
