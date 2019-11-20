@@ -51,7 +51,8 @@ module.exports = {
             "/web/vue/lifecycle",
             "/web/vue/vue-1",
             "/web/vue/vue-2",
-            "/web/vue/optimize"
+            "/web/vue/optimize",
+            "/web/vue/ui-library",
           ]
         },
         {
