@@ -86,6 +86,11 @@ module.exports = {
       // 后端
       "/server/": [
         {
+          title: "Java-EE",
+          collapsable: false,
+          children: ["/server/java-ee/modifier"]
+        },
+        {
           title: "Mysql",
           // collapsable: false,
           children: [
