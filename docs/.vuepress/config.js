@@ -127,6 +127,14 @@ module.exports = {
       ],
       "/ui-frame/": [
         {
+          title: '环境搭建',
+          collapsable: false,
+          sidebarDepth: 0,
+          children: [
+            "/ui-frame/build/vue"
+          ]
+        },
+        {
           title: 'PC端',
           collapsable: false,
           sidebarDepth: 0,
