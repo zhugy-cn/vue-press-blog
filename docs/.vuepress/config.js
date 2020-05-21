@@ -125,6 +125,14 @@ module.exports = {
           children: [
             "/ui-frame/pc/backbar"
           ]
+        },
+        {
+          title: '模板打印',
+          collapsable: false,
+          sidebarDepth: 0,
+          children: [
+            "/ui-frame/print/execute"
+          ]
         }
       ]
     }
