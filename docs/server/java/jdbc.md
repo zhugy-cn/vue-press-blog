@@ -162,8 +162,9 @@ try {
 ::: tip 3. Statement： 执行 “静态 Sql” 对象。拼接 Sql 有 Sql 注入的风险
 
 - 执行 Sql
-  _ `int executeUpdate(String sql)`：执行 DML（insert、update、delete）语句、DDL(create，alter、drop)语句
-  _ `ResultSet executeQuery(string sql)`：执行 DQL（select）语句
+
+  - `int executeUpdate(String sql)`：执行 DML（insert、update、delete）语句、DDL(create，alter、drop)语句
+  - `ResultSet executeQuery(string sql)`：执行 DQL（select）语句
 
 :::
 
