@@ -1,5 +1,5 @@
 module.exports = {
-  // title: "学习前端",
+  title: "学习前端",
   description: "Welcome to my blog",
   head: [["link", { rel: "icon", href: "/favicon.png" }]],
   themeConfig: {
