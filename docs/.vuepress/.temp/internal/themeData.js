@@ -1,6 +1,6 @@
 export const themeData = {
   "sidebarDepth": 2,
-  "nav": [
+  "navbar": [
     {
       "text": "前端基础",
       "link": "/web/"
@@ -15,7 +15,7 @@ export const themeData = {
     },
     {
       "text": "在线文档",
-      "items": [
+      "children": [
         {
           "text": "Vue",
           "link": "https://cn.vuejs.org/"
@@ -44,7 +44,7 @@ export const themeData = {
     },
     {
       "text": "在线工具",
-      "items": [
+      "children": [
         {
           "text": "Can I Use",
           "link": "https://www.caniuse.com/#search=promise"
@@ -81,8 +81,10 @@ export const themeData = {
         "text": "JavaScript",
         "collapsable": false,
         "children": [
+          "/web/javascript/debugger.md",
           "/web/javascript/programming-language.md",
           "/web/javascript/01-history.md",
+          "/web/javascript/02-HTML中的JavaScript.md",
           "/web/javascript/executing.md",
           "/web/javascript/date-type.md",
           "/web/javascript/event.md",
@@ -197,7 +199,6 @@ export const themeData = {
       "selectLanguageName": "English"
     }
   },
-  "navbar": [],
   "logo": null,
   "repo": null,
   "selectLanguageText": "Languages",

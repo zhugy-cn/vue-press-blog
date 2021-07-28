@@ -83,8 +83,13 @@ export const data = {
   ],
   "filePathRelative": "server/java-ee/modifier.md",
   "git": {
-    "updatedTime": 1577275608000,
+    "updatedTime": 1624007223000,
     "contributors": [
+      {
+        "name": "zhugy",
+        "email": "860185538@qq.com",
+        "commits": 1
+      },
       {
         "name": "zhugy-cn",
         "email": "860185538@qq.com",

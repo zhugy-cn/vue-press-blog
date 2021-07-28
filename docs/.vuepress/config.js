@@ -6,13 +6,13 @@ module.exports = {
   themeConfig: {
     sidebarDepth: 2,
     // 导航栏
-    nav: [
+    navbar: [
       { text: "前端基础", link: "/web/" },
       { text: "后端", link: "/server/" },
       { text: "UI框架", link: "/ui-frame/" },
       {
         text: "在线文档",
-        items: [
+        children: [
           { text: "Vue", link: "https://cn.vuejs.org/" },
           { text: "VueRouter", link: "https://router.vuejs.org/zh/" },
           {
@@ -23,14 +23,13 @@ module.exports = {
           { text: "EasyWeChat", link: "https://www.easywechat.com/" },
           {
             text: "VuePress",
-            link:
-              "https://blog.csdn.net/weixin_34345560/article/details/91457750",
+            link: "https://blog.csdn.net/weixin_34345560/article/details/91457750",
           },
         ],
       },
       {
         text: "在线工具",
-        items: [
+        children: [
           {
             text: "Can I Use",
             link: "https://www.caniuse.com/#search=promise",
@@ -60,8 +59,10 @@ module.exports = {
           text: "JavaScript",
           collapsable: false,
           children: [
+            "/web/javascript/debugger.md",
             "/web/javascript/programming-language.md",
             "/web/javascript/01-history.md",
+            "/web/javascript/02-HTML中的JavaScript.md",
             "/web/javascript/executing.md",
             "/web/javascript/date-type.md",
             "/web/javascript/event.md",

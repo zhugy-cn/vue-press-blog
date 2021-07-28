@@ -115,8 +115,14 @@ export const data = {
   ],
   "filePathRelative": "web/javascript/programming-language.md",
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1624007223000,
+    "contributors": [
+      {
+        "name": "zhugy",
+        "email": "860185538@qq.com",
+        "commits": 1
+      }
+    ]
   }
 }
 

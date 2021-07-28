@@ -27,10 +27,15 @@ export const data = {
   ],
   "filePathRelative": "server/java/spring.md",
   "git": {
-    "updatedTime": 1566056821000,
+    "updatedTime": 1624007223000,
     "contributors": [
       {
         "name": "ZhuGuangYong",
+        "email": "860185538@qq.com",
+        "commits": 1
+      },
+      {
+        "name": "zhugy",
         "email": "860185538@qq.com",
         "commits": 1
       }
