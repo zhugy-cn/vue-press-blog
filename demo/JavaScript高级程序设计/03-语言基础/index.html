@@ -71,42 +71,43 @@
     </script> -->
 
     <script>
-      var iArr = [];
-      for (var i = 0; i < 5; i++) {
-        iArr[i] = function () {
-          console.log(i);
-        };
+      var a = [0];
+      let c = 1;
+      {
+        let b = function () {};
+        console.dir(b);
       }
-      console.dir(iArr[2]);
 
-      let jArr = [];
-      for (let j = 0; j < 5; j++) {
-        jArr[j] = function () {
-          console.log(j);
-        };
-      }
-      console.dir(jArr[2]);
+      // var iArr = [];
+      // for (var i = 0; i < 5; i++) {
+      //   iArr[i] = function () {
+      //     console.log(i);
+      //   };
+      // }
+      // console.dir(iArr[2]);
 
-      function f1() {
-        let n = 5;
-        if (true) {
-          let n = 10;
-        }
-        console.log(n); // 5
-      }
-      f1();
+      // let jArr = [];
+      // for (let j = 0; j < 5; j++) {
+      //   jArr[j] = function () {
+      //     console.log(j);
+      //   };
+      // }
+      // console.dir(jArr[2]);
 
+      // function f1() {
+      //   let n = 5;
+      //   if (true) {
+      //     let n = 10;
+      //   }
+      //   console.log(n); // 5
+      // }
+      // f1();
 
-      
-      const foo = Object.freeze({});
+      // const foo = Object.freeze({});
 
-      // 常规模式时，下面一行不起作用；
-      // 严格模式时，该行会报错
-      foo.prop = 123;
-
-
-      
-      console.log(foo);
+      // // 常规模式时，下面一行不起作用；
+      // // 严格模式时，该行会报错
+      // foo.prop = 123;
     </script>
   </body>
 </html>
