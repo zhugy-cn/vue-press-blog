@@ -27,12 +27,12 @@ export const data = {
   ],
   "filePathRelative": "web/javascript/01-history.md",
   "git": {
-    "updatedTime": 1624007223000,
+    "updatedTime": 1627460312000,
     "contributors": [
       {
         "name": "zhugy",
         "email": "860185538@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   }

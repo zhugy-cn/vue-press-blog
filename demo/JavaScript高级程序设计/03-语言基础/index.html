@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+      if (true) {
+        var name = "Jack";
+        let age = 26;
+      }
+      console.log(name); // Jack
+      console.log(age); // 报错，ReferenceError: age is not defined
+
+            function test() {
+        var message = "hi"; // 局部变量，函数调用后就会被销毁
+      }
+      test();
+      console.log(message); // 报错 message is not defined
+
+      var name;
+
+      let name; //
+      let age; // SyntaxError: Identifier 'age' has already been declared
+
+      let age = 26;
+      if (true) {
+        let age = 30;
+        console.log(age); // 30
+      }
+      console.log(age); // 30
+      */
+      // console.log(foo);
+
+      // var foo = 2;
+      // var foo = function () {
+      //   console.log(2);
+      // };
+      // function foo() {
+      //   console.log(1);
+      // }
+
+      // console.log(age); // undefined
+      // let age = 26;
+
+      // var name = "Jack";
+      // console.log(window.name); // Jack
+
+      // let age = 26;
+      // console.log(window.age);  // undefined
+
+      // let age = 30;
+    </script>
+
+    <!-- <script>
+      var name = "Nicholas";
+      let age = 26;
+    </script>
+
+
+    <script>
+      var name = "Matt";
+      let age = 36;
+
+      console.log(name);
+      console.log(age);
+    </script> -->
+
+    <script>
+      var iArr = [];
+      for (var i = 0; i < 5; i++) {
+        iArr[i] = function () {
+          console.log(i);
+        };
+      }
+      console.dir(iArr[2]);
+
+      let jArr = [];
+      for (let j = 0; j < 5; j++) {
+        jArr[j] = function () {
+          console.log(j);
+        };
+      }
+      console.dir(jArr[2]);
+
+      function f1() {
+        let n = 5;
+        if (true) {
+          let n = 10;
+        }
+        console.log(n); // 5
+      }
+      f1();
+
+
+      
+      const foo = Object.freeze({});
+
+      // 常规模式时，下面一行不起作用；
+      // 严格模式时，该行会报错
+      foo.prop = 123;
+
+
+      
+      console.log(foo);
+    </script>
+  </body>
+</html>

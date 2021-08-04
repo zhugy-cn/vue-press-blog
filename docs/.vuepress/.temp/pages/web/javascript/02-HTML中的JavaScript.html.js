@@ -8,15 +8,27 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "script 标签",
-      "slug": "script-标签",
+      "title": "script 标签属性",
+      "slug": "script-标签属性",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "推迟执行脚本",
+      "slug": "推迟执行脚本",
       "children": []
     }
   ],
   "filePathRelative": "web/javascript/02-HTML中的JavaScript.md",
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1627460312000,
+    "contributors": [
+      {
+        "name": "zhugy",
+        "email": "860185538@qq.com",
+        "commits": 1
+      }
+    ]
   }
 }
 

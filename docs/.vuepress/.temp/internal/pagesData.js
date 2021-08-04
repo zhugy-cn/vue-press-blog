@@ -103,6 +103,8 @@ export const pagesData = {
   "v-0ed82d7a": () => import(/* webpackChunkName: "v-0ed82d7a" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/01-history.html.js").then(({ data }) => data),
   // path: /web/javascript/02-HTML%E4%B8%AD%E7%9A%84JavaScript.html
   "v-a4cd4a8c": () => import(/* webpackChunkName: "v-a4cd4a8c" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/02-HTML中的JavaScript.html.js").then(({ data }) => data),
+  // path: /web/javascript/03-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80.html
+  "v-315d9282": () => import(/* webpackChunkName: "v-315d9282" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/03-语言基础.html.js").then(({ data }) => data),
   // path: /web/javascript/array.html
   "v-f95742a4": () => import(/* webpackChunkName: "v-f95742a4" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/array.html.js").then(({ data }) => data),
   // path: /web/javascript/date-type.html

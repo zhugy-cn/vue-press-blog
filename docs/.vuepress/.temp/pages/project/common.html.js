@@ -5,81 +5,17 @@ export const data = {
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [
-    {
-      "level": 2,
-      "title": "智慧云仓",
-      "slug": "智慧云仓",
-      "children": [
-        {
-          "level": 3,
-          "title": "开发环境",
-          "slug": "开发环境",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "开发环境",
-          "slug": "开发环境-1",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "集装箱",
-      "slug": "集装箱",
-      "children": [
-        {
-          "level": 3,
-          "title": "正式环境",
-          "slug": "正式环境",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "测试环境",
-          "slug": "测试环境",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "开发环境",
-          "slug": "开发环境-2",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "营销网",
-      "slug": "营销网",
-      "children": [
-        {
-          "level": 3,
-          "title": "正式环境",
-          "slug": "正式环境-1",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "测试环境",
-          "slug": "测试环境-1",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "开发环境",
-          "slug": "开发环境-3",
-          "children": []
-        }
-      ]
-    }
-  ],
+  "headers": [],
   "filePathRelative": "project/common.md",
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1627460312000,
+    "contributors": [
+      {
+        "name": "zhugy",
+        "email": "860185538@qq.com",
+        "commits": 1
+      }
+    ]
   }
 }
 

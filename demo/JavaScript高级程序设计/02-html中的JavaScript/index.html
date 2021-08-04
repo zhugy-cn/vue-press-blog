@@ -12,7 +12,7 @@
       alt=""
     />
   </body>
-  <script>
+  <!-- <script>
     document.write(12312312);
     document.addEventListener("DOMContentLoaded", function (event) {
       console.log("DOMContentLoaded");
@@ -22,9 +22,17 @@
     });
   </script>
 
+  <script src="./01.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/angular.js/1.8.2/angular.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
-  <script src="./01.js"></script>
-  <script defer src="./02.js"></script>
-  <script async src="./index.js"></script>
+  <script src="./02.js"></script>
+  <script src="./index.js"></script> -->
+  <script>
+    var age = 26;
+    function foo() {
+      console.log(age);
+      var age = function () {};
+    }
+    foo();
+  </script>
 </html>

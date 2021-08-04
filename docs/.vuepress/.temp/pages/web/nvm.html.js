@@ -15,8 +15,14 @@ export const data = {
   ],
   "filePathRelative": "web/nvm.md",
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1627460312000,
+    "contributors": [
+      {
+        "name": "zhugy",
+        "email": "860185538@qq.com",
+        "commits": 1
+      }
+    ]
   }
 }
 

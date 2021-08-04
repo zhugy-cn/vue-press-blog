@@ -1,5 +1,5 @@
 export const themeData = {
-  "sidebarDepth": 2,
+  "sidebarDepth": 1,
   "navbar": [
     {
       "text": "前端基础",
@@ -38,7 +38,7 @@ export const themeData = {
         },
         {
           "text": "VuePress",
-          "link": "https://blog.csdn.net/weixin_34345560/article/details/91457750"
+          "link": "https://v2.vuepress.vuejs.org/zh/"
         }
       ]
     },
@@ -85,6 +85,7 @@ export const themeData = {
           "/web/javascript/programming-language.md",
           "/web/javascript/01-history.md",
           "/web/javascript/02-HTML中的JavaScript.md",
+          "/web/javascript/03-语言基础.md",
           "/web/javascript/executing.md",
           "/web/javascript/date-type.md",
           "/web/javascript/event.md",
@@ -98,98 +99,98 @@ export const themeData = {
         "text": "Node",
         "collapsable": false,
         "children": [
-          "/web/node/npm"
+          "/web/node/npm.md"
         ]
       },
       {
         "text": "写代码",
         "collapsable": false,
         "children": [
-          "/web/code/call",
-          "/web/code/throttle",
-          "/web/code/debounce"
+          "/web/code/call.md",
+          "/web/code/throttle.md",
+          "/web/code/debounce.md"
         ]
       },
       {
-        "title": "其他",
+        "text": "其他",
         "collapsable": false,
         "children": [
-          "/web/browser"
+          "/web/browser.md"
         ]
       }
     ],
     "/server/": [
       {
-        "title": "Java-EE",
+        "text": "Java-EE",
         "collapsable": false,
         "children": [
-          "/server/java-ee/modifier",
-          "/server/java-ee/iterable"
+          "/server/java-ee/modifier.md",
+          "/server/java-ee/iterable.md"
         ]
       },
       {
-        "title": "Mysql",
+        "text": "Mysql",
         "children": [
-          "/server/mysql/01-DML",
-          "/server/mysql/02-DQL",
-          "/server/mysql/03-constraint",
-          "/server/mysql/04-multi-table",
-          "/server/mysql/05-transaction"
+          "/server/mysql/01-DML.md",
+          "/server/mysql/02-DQL.md",
+          "/server/mysql/03-constraint.md",
+          "/server/mysql/04-multi-table.md",
+          "/server/mysql/05-transaction.md"
         ]
       },
       {
-        "title": "入门",
+        "text": "入门",
         "collapsable": false,
         "children": [
-          "/server/java/jdbc"
+          "/server/java/jdbc.md"
         ]
       },
       {
-        "title": "MyBatis",
+        "text": "MyBatis",
         "collapsable": false,
         "children": [
-          "/server/mybatis/xml",
-          "/server/mybatis/annotation"
+          "/server/mybatis/xml.md",
+          "/server/mybatis/annotation.md"
         ]
       },
       {
-        "title": "Spring",
+        "text": "Spring",
         "collapsable": false,
         "children": [
-          "/server/spring/01-basis"
+          "/server/spring/01-basis.md"
         ]
       },
       {
-        "title": "SpringMVC",
+        "text": "SpringMVC",
         "collapsable": false,
         "children": [
-          "/server/springMVC/01-basis"
+          "/server/springMVC/01-basis.md"
         ]
       }
     ],
     "/ui-frame/": [
       {
-        "title": "环境搭建",
+        "text": "环境搭建",
         "collapsable": false,
-        "sidebarDepth": 0,
+        "sidebarDepth": 1,
         "children": [
-          "/ui-frame/build/vue"
+          "/ui-frame/build/vue.md"
         ]
       },
       {
-        "title": "PC端",
+        "text": "PC端",
         "collapsable": false,
-        "sidebarDepth": 0,
+        "sidebarDepth": 1,
         "children": [
-          "/ui-frame/pc/backbar"
+          "/ui-frame/pc/backbar.md"
         ]
       },
       {
-        "title": "模板打印",
+        "text": "模板打印",
         "collapsable": false,
-        "sidebarDepth": 0,
+        "sidebarDepth": 1,
         "children": [
-          "/ui-frame/print/execute"
+          "/ui-frame/print/execute.md"
         ]
       }
     ]

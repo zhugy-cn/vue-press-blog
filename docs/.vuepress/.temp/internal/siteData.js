@@ -1,7 +1,7 @@
 export const siteData = {
   "base": "/",
   "lang": "zh-CN",
-  "title": "学习前端",
+  "title": "博客",
   "description": "Welcome to my blog",
   "head": [
     [

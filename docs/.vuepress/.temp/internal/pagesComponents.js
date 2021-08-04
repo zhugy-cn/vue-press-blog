@@ -105,6 +105,8 @@ export const pagesComponents = {
   "v-0ed82d7a": defineAsyncComponent(() => import(/* webpackChunkName: "v-0ed82d7a" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/01-history.html.vue")),
   // path: /web/javascript/02-HTML%E4%B8%AD%E7%9A%84JavaScript.html
   "v-a4cd4a8c": defineAsyncComponent(() => import(/* webpackChunkName: "v-a4cd4a8c" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/02-HTML中的JavaScript.html.vue")),
+  // path: /web/javascript/03-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80.html
+  "v-315d9282": defineAsyncComponent(() => import(/* webpackChunkName: "v-315d9282" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/03-语言基础.html.vue")),
   // path: /web/javascript/array.html
   "v-f95742a4": defineAsyncComponent(() => import(/* webpackChunkName: "v-f95742a4" */"D:/Code/vue-press-blog/docs/.vuepress/.temp/pages/web/javascript/array.html.vue")),
   // path: /web/javascript/date-type.html

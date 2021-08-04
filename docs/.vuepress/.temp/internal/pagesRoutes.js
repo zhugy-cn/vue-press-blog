@@ -53,6 +53,7 @@ const routeItems = [
   ["v-6358dfbe","/web/code/throttle.html","函数节流",["/web/code/throttle.md"]],
   ["v-0ed82d7a","/web/javascript/01-history.html","发展历史",["/web/javascript/01-history.md"]],
   ["v-a4cd4a8c","/web/javascript/02-HTML%E4%B8%AD%E7%9A%84JavaScript.html","HTML 中的 Javascript",["/web/javascript/02-HTML中的JavaScript.html","/web/javascript/02-HTML中的JavaScript.md","/web/javascript/02-HTML%E4%B8%AD%E7%9A%84JavaScript.md"]],
+  ["v-315d9282","/web/javascript/03-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80.html","语言基础",["/web/javascript/03-语言基础.html","/web/javascript/03-语言基础.md","/web/javascript/03-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80.md"]],
   ["v-f95742a4","/web/javascript/array.html","数组",["/web/javascript/array.md"]],
   ["v-27c9c00e","/web/javascript/date-type.html","数据类型",["/web/javascript/date-type.md"]],
   ["v-34ea460a","/web/javascript/debugger.html","断点调试",["/web/javascript/debugger.md"]],
