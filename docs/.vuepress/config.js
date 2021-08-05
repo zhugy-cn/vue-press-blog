@@ -64,6 +64,7 @@ module.exports = {
             "/web/javascript/01-history.md",
             "/web/javascript/02-HTML中的JavaScript.md",
             "/web/javascript/03-语言基础.md",
+            "/web/javascript/04-变量、作用域和内存.md",
             "/web/javascript/executing.md",
             "/web/javascript/date-type.md",
             "/web/javascript/event.md",
